@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.gifContainer{
+  margin: 5vh auto;
+  min-width: 300px;
+  max-width: 400px;
+  min-height: 300px;
+  border: 1px black solid;
+}

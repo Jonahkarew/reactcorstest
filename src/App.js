@@ -1,24 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Gif from './components/Gif';
+import Cheer from './components/Cheer';
+import Jqer from './components/Jqer'
 
 function App() {
+  const [gifShow, setGifShow] = useState(0)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => {gifShow ? setGifShow(0) : setGifShow(1)}}>show gif</button>
+      { gifShow ? <Gif /> : null}
+      <Cheer />
+      <Jqer />
     </div>
   );
 }

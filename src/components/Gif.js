@@ -1,14 +1,28 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
 
 function Gif() {
-    const url = "https://media.giphy.com/media/IbfgMjdG8qEOSYhffQ/giphy.gif";
+    const [gif, setGif] = useState()
     const getEm = () => {fetch("https://media.giphy.com/media/IbfgMjdG8qEOSYhffQ/giphy.gif")
-    .then(res => console.log(res))}
+    .then(res => 
+       {setGif(res.url)}
+        
+    )}
+    
+    useEffect(() => {
+
+     
+          getEm()
+        
+    })
+
     return (
-        <div>
-            
+        <div className="gifContainer">
+            <h1>this is the title</h1>
+            <div className="gifMount">
+                <img src={gif}></img>
+            </div>    
         </div>
     )
 }
 
-export default Gif
+export default Gif;
