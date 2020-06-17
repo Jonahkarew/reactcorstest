@@ -87,6 +87,50 @@ function Jqer() {
                                     .children(".db-tooltip__item__level")
                                     .text().replace("Item Level ", "")),
                     },
+                    head: {
+                        headName: $(res).find(".db-tooltip__item__name").eq(1).text(),
+                        headIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(1).text().replace("Item Level ", "")),
+                    },
+                    chest: {
+                        chestName: $(res).find(".db-tooltip__item__name").eq(2).text(),
+                        chestIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(2).text().replace("Item Level ", "")),
+                    },
+                    arms: {
+                        armsName: $(res).find(".db-tooltip__item__name").eq(3).text(),
+                        armsIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(3).text().replace("Item Level ", "")),
+                    },
+                    belt: {
+                        beltName: $(res).find(".db-tooltip__item__name").eq(4).text(),
+                        beltIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(4).text().replace("Item Level ", "")),
+                    },
+                    pants: {
+                        pantsName: $(res).find(".db-tooltip__item__name").eq(5).text(),
+                        pantsIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(5).text().replace("Item Level ", "")),
+                    },
+                    shoes: {
+                        shoesName: $(res).find(".db-tooltip__item__name").eq(6).text(),
+                        shoesIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(6).text().replace("Item Level ", "")),
+                    },
+                    earring: {
+                        earringName: $(res).find(".db-tooltip__item__name").eq(7).text(),
+                        earringIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(7).text().replace("Item Level ", "")),
+                    },
+                    necklace: {
+                        necklaceName: $(res).find(".db-tooltip__item__name").eq(8).text(),
+                        necklaceIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(8).text().replace("Item Level ", "")),
+                    },
+                    wrist: {
+                        wristName: $(res).find(".db-tooltip__item__name").eq(9).text(),
+                        wristIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(9).text().replace("Item Level ", "")),
+                    },
+                    ring1: {
+                        ring1Name: $(res).find(".db-tooltip__item__name").eq(10).text(),
+                        ring1Ilvl: parseInt($(res).find(".db-tooltip__item__level").eq(10).text().replace("Item Level ", "")),
+                    },
+                    ring2: {
+                        ring2Name: $(res).find(".db-tooltip__item__name").eq(11).text(),
+                        ring2Ilvl: parseInt($(res).find(".db-tooltip__item__level").eq(11).text().replace("Item Level ", "")),
+                    }
                 }
             }
             )
