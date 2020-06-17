@@ -141,7 +141,12 @@ function Jqer() {
     return (
         <div>
             <input onChange={e => setName(e.target.value)} className="nameInput"></input>
-            <input onChange={e => setWorld(e.target.value)} className="worldInput"></input>
+            <select onChange={e => setWorld(e.target.value)} className="worldInput">
+                <optgroup label="Chaos">
+                <option value="Phoenix">Phoenix</option>
+                </optgroup>
+                <option value="Cerberus">Cerberus</option>
+            </select>
             <button onClick={getId}>Search</button>
             {id}
             {JSON.stringify(character)}
