@@ -1,41 +1,106 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import $ from 'jquery';
 
 function Jqer() {
     const [id, setId] = useState();
     const [name, setName] = useState("veric talosson");
     const [world, setWorld] = useState("Phoenix");
-    const [test, setTest] = useState()
+    const [character, setCharacter] = useState({})
 
 
-    // useEffect(() => {
-    //        $.get("https://cors-anywhere.herokuapp.com/https://na.finalfantasyxiv.com/lodestone/", function(res){
-               
-    //     setSource($(res).find("h2").first().text())
-    //     console.log(res)
-    //        })
-     
-    // });
 
-    const getChar = () => {
+    const getId = () => {
         let url = `https://cors-anywhere.herokuapp.com/https://na.finalfantasyxiv.com/lodestone/character/?q=${name}&worldname=${world}&classjob=&race_tribe=&blog_lang=ja&blog_lang=en&blog_lang=de&blog_lang=fr&order=`;
-        $.get(url, function(res){
+        $.get(url, function (res) {
             var idResult = $(res).find(".entry__link").attr("href")
-            // .eq(0).children().first().attr("href")
-            .replace("/lodestone/character/", "").replace("/", "");
+                .replace("/lodestone/character/", "").replace("/", "");
             console.log(idResult)
             setId(idResult)
+            getChar(idResult)
         })
     }
 
+    const getChar = (id) => {
+        $.get(`https://cors-anywhere.herokuapp.com/https://na.finalfantasyxiv.com/lodestone/character/${id}/`, function (res) {
+            setCharacter(
+                { name: $(res).find('.frame__chara__name').text(),
+                title: $(res).find('.frame__chara__title').text(),
+                level: parseInt($(res).find('.character__class__data p').text().replace('LEVEL', '').trim()),
+                picture: $(res).find(".character__detail__image img").attr("src"),
+                stats: {
+                    attributes: {
+                        strength: $(res).find(".character__param__list tr td").eq(0).text(),
+                        dexterity: $(res).find(".character__param__list tr td").eq(1).text(),
+                        vitality: $(res).find(".character__param__list tr td").eq(2).text(),
+                        intelligence: $(res).find(".character__param__list tr td").eq(3).text(),
+                        mind: $(res).find(".character__param__list tr td").eq(4).text(),
+                    },
+                    subAttributes: {
+                        criticalHitRate: $(res).find(".character__param__list tr td").eq(5).text(),
+                        determination: $(res).find(".character__param__list tr td").eq(6).text(),
+                        directHitRate: $(res).find(".character__param__list tr td").eq(7).text(),
+                    },
+                    defensiveProperties: {
+                        defense: $(res).find(".character__param__list tr td").eq(8).text(),
+                        magicDefense: $(res).find(".character__param__list tr td").eq(9).text(),
+                    },
+                    physicalProperties: {
+                        attackPower: $(res).find(".character__param__list tr td").eq(10).text(),
+                        skillSpeed: $(res).find(".character__param__list tr td").eq(11).text(),
+                    },
+                    mentalProperties: {
+                        attackMagicPotency: $(res).find(".character__param__list tr td").eq(12).text(),
+                        healingMagicPotency: $(res).find(".character__param__list tr td").eq(13).text(),
+                        spellSpeed: $(res).find(".character__param__list tr td").eq(14).text(),
+                    },
+                    role: {
+                        tenacity: $(res).find(".character__param__list tr td").eq(15).text(),
+                        piety: $(res).find(".character__param__list tr td").eq(16).text()
+                    }
+                },
+                gear: {
+                    weapon: {
+                        weaponName: $(res).find(".db-tooltip__item__name").eq(0).text(),
+                        weaponIlvl: parseInt($(res).find(".db-tooltip__item__level").eq(0).text().replace("Item Level ", "")),
+                    },
+                    offHand: {
+                        offHandName: $(res).find(`.character__detail__icon`).eq(1)
+                                    .children()
+                                    .first()
+                                    .children(".item_detail_box")
+                                    .children()
+                                    .first()
+                                    .children(".popup_w412_body_gold")
+                                    .children().first()
+                                    .children().first()
+                                    .children(".db-tooltip__item__txt")
+                                    .children("h2")
+                                    .text(), 
+                        offHandIlvl:
+                                    parseInt($(res).find(`.character__detail__icon`).eq(1)
+                                    .children()
+                                    .first()
+                                    .children(".item_detail_box")
+                                    .children()
+                                    .first()
+                                    .children(".popup_w412_body_gold")
+                                    .children(".db-tooltip__item__level")
+                                    .text().replace("Item Level ", "")),
+                    },
+                }
+            }
+            )
+        })
+    }
 
 
     return (
         <div>
             <input onChange={e => setName(e.target.value)} className="nameInput"></input>
-            <input onChange={e => setWorld(e.target.value)}className="worldInput"></input>
-            <button onClick={getChar}>Search</button>
+            <input onChange={e => setWorld(e.target.value)} className="worldInput"></input>
+            <button onClick={getId}>Search</button>
             {id}
+            {JSON.stringify(character)}
         </div>
     )
 }
